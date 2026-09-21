@@ -450,7 +450,7 @@
   }
 
   .comment {
-    @apply border-b border-line py-3;
+    @apply border-b border-line px-5 py-3;
   }
 
   .comment:last-child {
@@ -471,7 +471,7 @@
   }
 
   .audit-item {
-    @apply border-b border-line py-2.5;
+    @apply border-b border-line px-5 py-2.5;
   }
 
   .audit-item:last-child {
@@ -483,7 +483,7 @@
   }
 
   .notification-item {
-    @apply flex items-center gap-3 border-b border-line py-3;
+    @apply flex items-center gap-3 border-b border-line px-5 py-3;
   }
 
   .notification-item:last-child {
@@ -500,6 +500,10 @@
 
   .notification-body.is-read p {
     @apply text-muted;
+  }
+
+  .notification-dot {
+    @apply h-2 w-2 min-w-0 shrink-0 rounded-full bg-danger px-0;
   }
 
   /* ---- Profile ---- */

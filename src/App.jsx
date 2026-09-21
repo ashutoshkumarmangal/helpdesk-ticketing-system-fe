@@ -1,9 +1,9 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'
 import MainLayout from './layouts/MainLayout'
-import { useAuth } from './context/AuthContext'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Home from './pages/Home'
 import Dashboard from './pages/Dashboard'
 import TicketList from './pages/TicketList'
 import CreateTicket from './pages/CreateTicket'
@@ -12,15 +12,13 @@ import Users from './pages/Users'
 import Notifications from './pages/Notifications'
 import Profile from './pages/Profile'
 
-/** Sends each role to its natural home page. */
-function HomeRedirect() {
-  const { user } = useAuth()
-  return <Navigate to={user?.role === 'ADMIN' ? '/dashboard' : '/tickets'} replace />
-}
-
 export default function App() {
   return (
     <Routes>
+      <Route element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+      </Route>
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
 
@@ -31,7 +29,6 @@ export default function App() {
           </ProtectedRoute>
         }
       >
-        <Route path="/" element={<HomeRedirect />} />
         <Route
           path="/dashboard"
           element={
@@ -55,7 +52,7 @@ export default function App() {
         <Route path="/profile" element={<Profile />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }
