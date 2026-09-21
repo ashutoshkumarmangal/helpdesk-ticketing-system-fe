@@ -1,0 +1,18 @@
+import { Navigate, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
+
+/** Redirects unauthenticated users to /login and optionally enforces a role. */
+export default function ProtectedRoute({ children, roles }) {
+  const { user } = useAuth()
+  const location = useLocation()
+
+  if (!user) {
+    return <Navigate to="/login" replace state={{ from: location.pathname }} />
+  }
+
+  if (roles && !roles.includes(user.role)) {
+    return <Navigate to="/tickets" replace />
+  }
+
+  return children
+}
